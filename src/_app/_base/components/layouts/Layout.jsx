@@ -13,7 +13,11 @@ export default class Layout extends React.Component {
                 <app-header-layout class="layout vertical" fullbleed>
                     <app-header>
                         <app-toolbar>
-                            <Link to='/'><div className={style['logo']}>ACROPOLIS</div></Link>
+                            <Link to='/'>
+                              <div>
+                                <img src='/assets/img/logo.png' className={style.logo}/>
+                              </div>
+                            </Link>
                             <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
                         </app-toolbar>
                     </app-header>

@@ -241,7 +241,7 @@ module.exports = {
                     "type": "event"
                 }
             ],
-            address: '0x1d004fcf6954809f66b9e5939a9964cd749162b1'
+            address: '0x738ad85e6a7d3816307feacdce5eee2e9de7eadc'
         }
     }
 }
