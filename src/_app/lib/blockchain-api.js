@@ -254,9 +254,9 @@ function listeners(){
 }
 
 // // FULL DEMO TEST
-// contractDeployAssetLoan(settings.ASSET_LOAN, 'assetLoan', null, null, function(e, r){});
+contractDeployAssetLoan(settings.ASSET_LOAN, 'assetLoan', null, null, function(e, r){});
 
-listeners();
+// listeners();
 
 // ADD
 // investmentProposalAdd(settings.INVESTOR1, 10000, function(e, r){});
@@ -272,7 +272,7 @@ listeners();
 // fundsAdd(100000, function(e, r){ console.log(r); });
 
 // PAYMENT CYCLE
-paymentExecute(function(e, r) {});
+// paymentExecute(function(e, r) {});
 
 
 
