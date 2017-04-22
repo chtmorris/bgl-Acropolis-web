@@ -1,0 +1,36 @@
+.profile-box {
+  background-color: rgba(255, 255, 255, 0.92);
+  position: absolute;
+  box-shadow: 5px 5px 5px #888888;
+  margin: 20px;
+}
+
+.price{
+  color: #7ED321;
+  margin-top: -10px !important;
+  font-size: 25px;
+}
+
+.green-text {
+  font-size: 25px;
+  font-weight: bold;
+  color: #7ED321;
+}
+
+h2 {
+  font-weight: bold;
+}
+
+h4 {
+  color: #696969;
+  margin-top: -10px;
+}
+
+p {
+  color: #696969;
+  line-height: 1.4;
+}
+
+.summaryTitle {
+  margin-top: 130px;
+}

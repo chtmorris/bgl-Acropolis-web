@@ -1,0 +1,25 @@
+.name {
+  font-weight: bold;
+  margin: 20px 0 10px 0;
+  font-size: 18px;
+}
+
+.value {
+  color: #7ED321;
+  margin-top: 5px;
+}
+
+.address {
+  color: gray;
+  margin-top: 10px;
+}
+
+.minVal {
+  color: #989898;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.progbar {
+  margin: 20px;
+}

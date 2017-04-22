@@ -258,5 +258,4 @@ function listeners() {
 // fundsAdd(100000, function(e, r){ console.log(r); });
 
 // PAYMENT CYCLE
-
 //paymentExecute(function(e, r) {});
