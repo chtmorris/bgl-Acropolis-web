@@ -25,8 +25,6 @@ export default class Profile extends React.Component {
             let _borrower = res.args.borrower;
             let _investor = res.args.investor;
 
-            console.log('test')
-
             this.refs.toaster.text = "investment added";
             this.refs.toaster.open();
 
