@@ -1,19 +1,24 @@
 import React from 'react';
 import style from './index.css';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
 import { Grid } from 'reflexbox';
+import TextField from 'material-ui/TextField';
+
+const fieldStyle = {
+  floatingLabelStyle: {
+    color: '#7ED321',
+  },
+  floatingLabelFocusStyle: {
+    color: '#7ED321',
+  },
+};
 
 export default class Profile extends React.Component {
     render() {
         return (
             <div>
               <Card>
-                {/* <CardHeader
-                  title="URL Avatar"
-                  subtitle="Subtitle"
-                  avatar="images/jsa-128.jpg"
-                /> */}
+
                 <CardMedia>
                   <div className={style['profile-box']}>
                     <div>
@@ -41,12 +46,25 @@ export default class Profile extends React.Component {
                         <p>Backers</p>
                       </Grid>
                     </div>
+
+                    {/* ===== LINK HERE TO SMART CONTRACT ===== */}
+                    <div className={style['invest']}>
+                      <div className={style['investAmount']}>
+                        <TextField
+                          floatingLabelText="How much would you like to invest?"
+                          floatingLabelStyle={fieldStyle.floatingLabelStyle}
+                          floatingLabelFocusStyle={fieldStyle.floatingLabelFocusStyle}
+                          />
+                      </div>
+                      <button className="mdc-button mdc-button--primary" data-demo-no-js>
+                        Invest with Joan
+                      </button>
+                    </div>
+
                   </div>
                   <img src="/assets/img/house.png" />
                 </CardMedia>
-                <button className="mdc-button mdc-button--primary" data-demo-no-js>
-                  Invest with Joan
-                </button>
+
                 <CardTitle title="Why invest with Joan Wagner" subtitle="Your rate on investment:" />
                 <p className={style['rate']}>8.00%</p>
                 <Grid col={4} px={2} py={2}>
@@ -67,16 +85,6 @@ export default class Profile extends React.Component {
                   </div>
                 </Grid>
 
-                {/* <CardText>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-                  Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
-                  Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
-                </CardText>
-                <CardActions>
-                  <FlatButton label="Action1" />
-                  <FlatButton label="Action2" />
-                </CardActions> */}
               </Card>
             </div>
         );
