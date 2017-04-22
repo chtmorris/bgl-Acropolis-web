@@ -1,39 +1,64 @@
 import React from 'react';
 import Slider from 'material-ui/Slider';
+import { Link } from 'react-router';
+import style from './index.css';
 
 const data = [
     {
         name: 'Joan Wagner',
-        market_value: 4000000,
+        market_value: '$4,000,000',
         address: '135 Toronto Street',
         minimum_investment: 25000,
         commited_investment: 0.75,
         pic: '/assets/img/Joan.png',
-        snapshot: '/assets/img/house.png'
+        snapshot: '/assets/img/house1.png',
+        prog: '/assets/img/progBar1.png',
     }, {
         name: 'Joe Meyer',
-        market_value: 1800000,
+        market_value: '$1,800,000',
         address: '135 Toronto Street',
         minimum_investment: 50000,
         commited_investment: 0.45,
-        pic: '/assets/img/Joan.png',
-        snapshot: '/assets/img/house.png'
+        pic: '/assets/img/person2.png',
+        snapshot: '/assets/img/house2.png',
+        prog: '/assets/img/progBar2.png',
     }, {
         name: 'Adam Lemmon',
-        market_value: 1800000,
+        market_value: '$1,800,000',
         address: '135 Toronto Street',
         minimum_investment: 50000,
         commited_investment: 0.45,
-        pic: '/assets/img/Joan.png',
-        snapshot: '/assets/img/house.png'
+        pic: '/assets/img/person3.png',
+        snapshot: '/assets/img/house3.png',
+        prog: '/assets/img/progBar3.png',
     }, {
         name: 'Charlie Morris',
-        market_value: 1800000,
+        market_value: '$1,800,000',
         address: '135 Toronto Street',
         minimum_investment: 50000,
         commited_investment: 0.45,
-        pic: '/assets/img/Joan.png',
-        snapshot: '/assets/img/house.png'
+        pic: '/assets/img/person4.png',
+        snapshot: '/assets/img/house4.png',
+        prog: '/assets/img/progBar3.png',
+    },
+    {
+        name: 'Joan Wagner',
+        market_value: '$4,000,000',
+        address: '135 Toronto Street',
+        minimum_investment: 25000,
+        commited_investment: 0.75,
+        pic: '/assets/img/person5.png',
+        snapshot: '/assets/img/house5.png',
+        prog: '/assets/img/progBar1.png',
+    }, {
+        name: 'Joe Meyer',
+        market_value: '$1,800,000',
+        address: '135 Toronto Street',
+        minimum_investment: 50000,
+        commited_investment: 0.45,
+        pic: '/assets/img/person6.png',
+        snapshot: '/assets/img/house6.png',
+        prog: '/assets/img/progBar2.png',
     }
 
 ];
@@ -62,27 +87,31 @@ export default class Home extends React.Component {
                                             }}/>
                                         </div>
                                         <div className="flex">
-                                            <div>{profile.name}</div>
-                                            <div>{profile.market_value}</div>
-                                            <div>{profile.address}</div>
+                                            <div className={style.name}>{profile.name}</div>
+                                            <div className={style.value}>{profile.market_value}</div>
+                                            <div className={style.address}>{profile.address}</div>
                                             <div style={{
                                                 margin: '0.382rem 0'
                                             }}>
-                                                <div>Minimum Investment</div>
+                                                <div className={style.minVal}>Minimum Investment</div>
                                                 <div>${profile.minimum_investment}</div>
                                             </div>
                                         </div>
                                     </article>
                                 </div>
-                                <div style={{
+                                <div className={style.progbar}>
+                                  <img src={profile.prog}/>
+                                </div>
+
+                                {/* <div style={{
                                     padding: '0 1rem'
                                 }}>
                                     <Slider defaultValue={profile.commited_investment}/>
-                                </div>
+                                </div> */}
                             </div>
                             <div className="card-actions">
                                 <div className="layout horizontal center-center">
-                                    <paper-button>Invest</paper-button>
+                                    <paper-button><Link to="/profile">Invest</Link></paper-button>
                                 </div>
                             </div>
 
