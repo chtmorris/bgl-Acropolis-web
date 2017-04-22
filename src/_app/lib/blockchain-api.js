@@ -43,7 +43,7 @@ export function investmentProposalAdd(investor, amount, callback) {
 
 export function investmentProposalApprove(investor, callback) {
     /***
-	*/
+    */
     console.log('Approving proposal: ' + investor);
 
     var contract,
@@ -56,6 +56,28 @@ export function investmentProposalApprove(investor, callback) {
     owner = accountSetupForTransaction(settings.FUELING_ACCOUNT, settings.DEFAULT_PASSWORD);
 
     response = contract.investmentProposalApprove.sendTransaction(investor, {
+        from: owner,
+        gas: settings.DEFAULT_GAS
+    });
+
+    callback(null, response);
+}
+
+export function investmentProposalDecline(investor, callback) {
+    /***
+	*/
+    console.log('Declining proposal: ' + investor);
+
+    var contract,
+        owner,
+        response;
+
+    contract = contractLoad(settings.ASSET_LOAN);
+
+    // Send as fueling account
+    owner = accountSetupForTransaction(settings.FUELING_ACCOUNT, settings.DEFAULT_PASSWORD);
+
+    response = contract.investmentProposalDecline.sendTransaction(investor, {
         from: owner,
         gas: settings.DEFAULT_GAS
     });
