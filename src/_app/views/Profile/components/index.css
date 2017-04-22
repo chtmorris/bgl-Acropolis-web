@@ -44,8 +44,6 @@ button {
   font-size: 18px !important;
   color: white !important;
   min-height: 50px;
-  margin-top: -25px;
-  left: 75%;
   box-shadow: 5px 5px 5px #888888;
 }
 
@@ -68,7 +66,9 @@ button {
 }
 
 .invest {
-  color: #7ED321;
-  left: 75%;
-  margin-bottom: 15px;
+  margin: -40px 0 30px 100px;
+}
+
+.investAmount {
+  margin-right: 40px;
 }
