@@ -1,9 +1,5 @@
 var Web3 = require('web3');
-var YAML = require('yamljs');
-
-var utils = require('./utils/base');
-
-var settings = YAML.load('./settings.yml');
+var settings = require('./settings');
 
 // Connect to local geth node
 var web3 = new Web3(
@@ -12,8 +8,8 @@ var web3 = new Web3(
 
 
 /*** @section Loan Asset Methods */
-function fundsAdd(amount, callback){
-	utils.debugLogOutput('Adding funds: ' + amount);
+export function fundsAdd(amount, callback){
+	console.log('Adding funds: ' + amount);
 
 	var contract, owner, response;
 
@@ -33,10 +29,10 @@ function fundsAdd(amount, callback){
 	callback(null, response);
 }
 
-function investmentProposalAdd(investor, amount, callback){
+export function investmentProposalAdd(investor, amount, callback){
 	/***
 	*/
-	utils.debugLogOutput('Adding proposal: ' + investor);
+	console.log('Adding proposal: ' + investor);
 
 	var contract, owner, response;
 
@@ -56,10 +52,10 @@ function investmentProposalAdd(investor, amount, callback){
 	callback(null, response);
 }
 
-function investmentProposalApprove(investor, callback){
+export function investmentProposalApprove(investor, callback){
 	/***
 	*/
-	utils.debugLogOutput('Approving proposal: ' + investor);
+	console.log('Approving proposal: ' + investor);
 
 	var contract, owner, response;
 
@@ -81,8 +77,8 @@ function investmentProposalApprove(investor, callback){
 	callback(null, response);
 }
 
-function paymentExecute(callback){
-	utils.debugLogOutput('Payment Execute');
+export function paymentExecute(callback){
+	console.log('Payment Execute');
 
 	var contract, owner, response;
 
@@ -131,7 +127,7 @@ function contractDeployAssetLoan(fileName, id, fromAccount, accountPass, callbac
 	* @param {string} accountPass: password to unlock account
 	* @callback {function}
 	*/
-	utils.debugLogOutput('Deploying contract: ' + id);
+	console.log('Deploying contract: ' + id);
 
     var owner, source, compiled, contractObject, gasEstimate;
 
@@ -202,9 +198,9 @@ function callbackContractDeployment(e, contract, id){
 	*/
 	if(!e) {
 		if(!contract.address) {
-		  utils.debugLogOutput("Contract transaction sent: TransactionHash: " + contract.transactionHash + " waiting to be mined...");
+		  console.log("Contract transaction sent: TransactionHash: " + contract.transactionHash + " waiting to be mined...");
 		} else {
-			utils.debugLogOutput("Contract mined! Address: " + contract.address);
+			console.log("Contract mined! Address: " + contract.address);
 		}
 	}
 	else {
@@ -218,7 +214,7 @@ function callbackDefaultEventListener(error, result){
 	* @param {object} error: error occured during event
 	* @param {object} result: the complete event result object
 	*/
-	utils.debugLogOutput('Event Fired!');
+	console.log('Event Fired!');
 
 	if (!error)
 		console.log(result);

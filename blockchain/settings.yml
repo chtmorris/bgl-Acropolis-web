@@ -1,13 +1,4 @@
 ## Constants
-EMPTY_ADDRESS: '0x0000000000000000000000000000000000000000'
-
-PORT: 'port'
-IP: 'ip'
-
-ID: 'id'
-
-JSON_RPC: 'jsonrpc'
-
 INTERFACE: 'interface'
 DATA: 'data'
 
