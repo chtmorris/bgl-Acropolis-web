@@ -4,6 +4,9 @@ import {Card, CardMedia, CardTitle} from 'material-ui/Card';
 import {Grid} from 'reflexbox';
 import TextField from 'material-ui/TextField';
 
+import settings from '_app/lib/settings';
+import {investmentProposalAdd} from '_app/lib/blockchain-api';
+
 const fieldStyle = {
     underlineStyle: {
         color: '#7ED321'
@@ -11,6 +14,14 @@ const fieldStyle = {
 };
 
 export default class Profile extends React.Component {
+    addInvestment() {
+        console.log(this.refs.investment_value.value)
+
+        investmentProposalAdd(settings.INVESTOR1, 10000, () => {
+            console.log('investment added')
+        });
+    }
+
     render() {
         return (
             <div>
@@ -45,9 +56,9 @@ export default class Profile extends React.Component {
 
                             {/* ===== LINK HERE TO SMART CONTRACT ===== */}
                             <div className={style['invest']}>
-                                <TextField hintText="How much would you like to invest?" underlineStyle={fieldStyle.underlineStyle}/>
+                                <TextField ref="investment_value" hintText="How much would you like to invest?" underlineStyle={fieldStyle.underlineStyle}/>
                                 <span className={style['investAmount']}></span>
-                                <button className="mdc-button mdc-button--primary" data-demo-no-js>
+                                <button className="mdc-button mdc-button--primary" onClick={this.addInvestment.bind(this)}>
                                     Invest with Joan
                                 </button>
                             </div>
