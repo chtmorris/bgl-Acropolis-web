@@ -1,0 +1,37 @@
+table.ss-table th {
+    color: var(--paper-grey-500);
+    margin: 0;
+    padding: 0 1rem;
+    text-transform: uppercase;
+    line-height: 1.618rem;
+    letter-spacing: 0.0382rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+table.ss-table thead tr:last-child th {
+    border-bottom: 2px solid var(--paper-grey-400);
+}
+
+table.ss-table tbody tr:hover td {
+    background-color: var(--paper-grey-300);
+}
+
+table.ss-table tbody tr:active td {
+    background-color: var(--paper-grey-200);
+}
+
+table.ss-table tbody tr:first-child td {
+    padding-top: 1rem;
+}
+
+table.ss-table tbody td {
+    padding: 0.382rem 1rem;
+    white-space: nowrap;
+    border-bottom: 1px solid var(--paper-grey-300);
+}
+
+table.ss-table tbody td div:nth-child(2) {
+    color: var(--paper-grey-600);
+}
