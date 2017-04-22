@@ -13,7 +13,6 @@ export default class Layout extends React.Component {
                     <app-header>
                         <app-toolbar>
                             <div className={style['logo']}>ACROPOLIS</div>
-                            <div>Profile</div>
                             <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
                         </app-toolbar>
                     </app-header>
