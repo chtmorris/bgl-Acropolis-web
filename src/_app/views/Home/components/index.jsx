@@ -8,6 +8,7 @@ const data = [
         address: '135 Toronto Street',
         minimum_investment: 25000,
         commited_investment: 0.75,
+        pic: '/assets/img/Joan.png',
         snapshot: '/assets/img/house.png'
     }, {
         name: 'Joe Meyer',
@@ -15,6 +16,7 @@ const data = [
         address: '135 Toronto Street',
         minimum_investment: 50000,
         commited_investment: 0.45,
+        pic: '/assets/img/Joan.png',
         snapshot: '/assets/img/house.png'
     }, {
         name: 'Adam Lemmon',
@@ -22,6 +24,7 @@ const data = [
         address: '135 Toronto Street',
         minimum_investment: 50000,
         commited_investment: 0.45,
+        pic: '/assets/img/Joan.png',
         snapshot: '/assets/img/house.png'
     }, {
         name: 'Charlie Morris',
@@ -29,6 +32,7 @@ const data = [
         address: '135 Toronto Street',
         minimum_investment: 50000,
         commited_investment: 0.45,
+        pic: '/assets/img/Joan.png',
         snapshot: '/assets/img/house.png'
     }
 
@@ -47,25 +51,41 @@ export default class Home extends React.Component {
                             maxWidth: '300px',
                             margin: '1rem'
                         }}>
+
                             <div class="card-content">
                                 <div class="cafe-header">
-                                    <paper-item>
-                                        <paper-item-body two-line>
+                                    <article className="layout horizontal">
+                                        <div>
+                                            <img src={profile.pic} alt="pic" style={{
+                                                maxHeight: '4rem',
+                                                margin: '1rem'
+                                            }}/>
+                                        </div>
+                                        <div className="flex">
                                             <div>{profile.name}</div>
-                                            <div secondary>{profile.market_value}</div>
-                                        </paper-item-body>
-                                        <iron-icon icon="warning"></iron-icon>
-                                    </paper-item>
+                                            <div>{profile.market_value}</div>
+                                            <div>{profile.address}</div>
+                                            <div style={{
+                                                margin: '0.382rem 0'
+                                            }}>
+                                                <div>Minimum Investment</div>
+                                                <div>${profile.minimum_investment}</div>
+                                            </div>
+                                        </div>
+                                    </article>
                                 </div>
-                                <div>
+                                <div style={{
+                                    padding: '0 1rem'
+                                }}>
                                     <Slider defaultValue={profile.commited_investment}/>
                                 </div>
                             </div>
-                            <div class="card-actions">
-                                <div class="horizontal justified">
+                            <div className="card-actions">
+                                <div className="layout horizontal center-center">
                                     <paper-button>Invest</paper-button>
                                 </div>
                             </div>
+
                         </paper-card>
                     ))}
 
