@@ -5,10 +5,7 @@ import { Grid } from 'reflexbox';
 import TextField from 'material-ui/TextField';
 
 const fieldStyle = {
-  floatingLabelStyle: {
-    color: '#7ED321',
-  },
-  floatingLabelFocusStyle: {
+  underlineStyle: {
     color: '#7ED321',
   },
 };
@@ -35,7 +32,6 @@ export default class Profile extends React.Component {
                       <Grid col={4} px={2} py={2}>
                         <p className={style['green-text']}>570</p>
                         <p>Credit score</p>
-                        <p>Learn more</p>
                       </Grid>
                       <Grid col={6} px={2} py={2}>
                         <p className={style['green-text']}>General Electric</p>
@@ -49,13 +45,11 @@ export default class Profile extends React.Component {
 
                     {/* ===== LINK HERE TO SMART CONTRACT ===== */}
                     <div className={style['invest']}>
-                      <div className={style['investAmount']}>
-                        <TextField
-                          floatingLabelText="How much would you like to invest?"
-                          floatingLabelStyle={fieldStyle.floatingLabelStyle}
-                          floatingLabelFocusStyle={fieldStyle.floatingLabelFocusStyle}
-                          />
-                      </div>
+                      <TextField
+                        hintText="How much would you like to invest?"
+                        underlineStyle={fieldStyle.underlineStyle}
+                        />
+                      <span className={style['investAmount']}></span>
                       <button className="mdc-button mdc-button--primary" data-demo-no-js>
                         Invest with Joan
                       </button>
