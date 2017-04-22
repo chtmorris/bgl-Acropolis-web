@@ -35,6 +35,7 @@ h4 {
 
 p {
   color: #696969;
+  line-height: 1.4;
 }
 
 button {
@@ -56,4 +57,18 @@ button {
 
 .video {
   margin-top: -55px !important;
+}
+
+.floatingLabelStyle {
+  color: #7ED321;
+}
+
+.floatingLabelFocusStyle {
+  color: #7ED321;
+}
+
+.invest {
+  color: #7ED321;
+  left: 75%;
+  margin-bottom: 15px;
 }

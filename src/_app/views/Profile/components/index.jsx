@@ -1,8 +1,8 @@
 import React from 'react';
 import style from './index.css';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
 import { Grid } from 'reflexbox';
+import TextField from 'material-ui/TextField';
 
 export default class Profile extends React.Component {
     render() {
@@ -66,6 +66,20 @@ export default class Profile extends React.Component {
                     <p>Backers</p>
                   </div>
                 </Grid>
+
+                <Grid col={12} px={2} py={2}>
+                  <div className={style['invest']}>
+                    <TextField
+                      floatingLabelText="How much would you like to invest?"
+                      floatingLabelStyle={style['floatingLabelStyle']}
+                      floatingLabelFocusStyle={style['floatingLabelFocusStyle']}
+                      className={style['invest']}
+                      />
+                  </div>
+                </Grid>
+                <button className="mdc-button mdc-button--primary" data-demo-no-js>
+                  Invest
+                </button>
 
                 {/* <CardText>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
