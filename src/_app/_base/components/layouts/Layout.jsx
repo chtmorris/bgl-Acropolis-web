@@ -1,4 +1,5 @@
 import React from 'react';
+import style from './Layout.css';
 
 export default class Layout extends React.Component {
     render() {
@@ -11,7 +12,8 @@ export default class Layout extends React.Component {
                 <app-header-layout class="layout vertical" fullbleed>
                     <app-header>
                         <app-toolbar>
-                            <div>ACROPOLIS</div>
+                            <div className={style['logo']}>ACROPOLIS</div>
+                            <div>Profile</div>
                             <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
                         </app-toolbar>
                     </app-header>
