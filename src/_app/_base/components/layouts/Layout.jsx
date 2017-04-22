@@ -1,5 +1,6 @@
 import React from 'react';
 import style from './Layout.css';
+import { Link } from 'react-router';
 
 export default class Layout extends React.Component {
     render() {
@@ -12,7 +13,7 @@ export default class Layout extends React.Component {
                 <app-header-layout class="layout vertical" fullbleed>
                     <app-header>
                         <app-toolbar>
-                            <div className={style['logo']}>ACROPOLIS</div>
+                            <Link to='/'><div className={style['logo']}>ACROPOLIS</div></Link>
                             <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
                         </app-toolbar>
                     </app-header>
