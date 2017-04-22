@@ -38,7 +38,16 @@ export function investmentProposalAdd(investor, amount, callback) {
 
     response = contract.investmentProposalAdd.sendTransaction({from: owner, value: amount, gas: settings.DEFAULT_GAS});
 
-    callback(null, response);
+    return new Promise((resolve, reject) => {
+        contract['InvestmentProposalAddedEvent']().watch(function(err, result) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(result);
+            }
+        })
+    });
+
 }
 
 export function investmentProposalApprove(investor, callback) {
@@ -140,10 +149,9 @@ function contractDeployAssetLoan(fileName, id, fromAccount, accountPass, callbac
         callbackContractDeployment(e, contract, id);
     });
     callback(null, gasEstimate);
-}
+};
 
-function
-contractLoad(fileName) {
+function contractLoad(fileName) {
     /**
 	* Load deployed contract into local object
 	* @param {string} fileName: the name of the contract file, required to load
@@ -160,16 +168,14 @@ contractLoad(fileName) {
     if (address)
         contract = web3.eth.contract(_interface).at(address);
 
-    return
-    contract;
-}
+    return contract;
+};
 
 /**********
 * Helpers *
 **********/
 // Not likey to be accessed externally
-function
-callbackContractDeployment(e, contract, id) {
+function callbackContractDeployment(e, contract, id) {
     /**
 	* Helper utilized when deploying a contract.  Deploy contract and update
 	* local object
@@ -186,24 +192,23 @@ callbackContractDeployment(e, contract, id) {
     } else {
         console.log("err: " + e)
     }
-}
+};
 
-function
-callbackDefaultEventListener(error, result) {
+function callbackDefaultEventListener(error, result) {
     /**
 	* Default listener to use for contract events
 	* @param {object} error: error occured during event
 	* @param {object} result: the complete event result object
 	*/
     console.log('Event Fired!');
-    if (!error)
+    if (!error) {
         console.log(result);
-    else
+    } else {
         console.log("Err: " + error);
     }
+};
 
-function
-accountSetupForTransaction(account, password) {
+function accountSetupForTransaction(account, password) {
     /** Setup the given account in order to send transaction
 		Unlock, fund, etc. to be expanded
 		* @param {string} fileName: name of the contract file to load
@@ -212,17 +217,16 @@ accountSetupForTransaction(account, password) {
 
     // If no account passed in then default to fueling
     if (!(account)) {
+        debugger
         account = settings.FUELING_ACCOUNT;
         password = settings.DEFAULT_PASSWORD;
     }
 
     web3.personal.unlockAccount(account, password);
-    return
-    account;
-}
+    return account;
+};
 
-function
-listeners() {
+function listeners() {
     var contract = contractLoad(settings.ASSET_LOAN);
 
     // Event listeners
@@ -236,7 +240,7 @@ listeners() {
 }
 
 // // FULL DEMO TEST
-// contractDeployAssetLoan(settings.ASSET_LOAN, 'assetLoan', null, null, function(e, r){});
+//contractDeployAssetLoan(settings.ASSET_LOAN, 'assetLoan', null, null, function(e, r) {});
 
 //listeners();
 

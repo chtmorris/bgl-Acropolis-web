@@ -15,10 +15,23 @@ const fieldStyle = {
 
 export default class Profile extends React.Component {
     addInvestment() {
+        // todo: get value
         console.log(this.refs.investment_value.value)
 
-        investmentProposalAdd(settings.INVESTOR1, 10000, () => {
-            console.log('investment added')
+        investmentProposalAdd(settings.INVESTOR1, 10000).then(res => {
+
+            // todo: future reference
+            let _amount = res.args.amount.c[0];
+            let _borrower = res.args.borrower;
+            let _investor = res.args.investor;
+
+            console.log('test')
+
+            this.refs.toaster.text = "investment added";
+            this.refs.toaster.open();
+
+        }).catch(err => {
+            console.error(err);
         });
     }
 
@@ -87,6 +100,8 @@ export default class Profile extends React.Component {
                     </Grid>
 
                 </Card>
+
+                <paper-toast ref="toaster"/>
             </div>
         );
     }
