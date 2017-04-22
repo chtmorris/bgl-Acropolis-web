@@ -2,21 +2,30 @@ import React from 'react';
 import style from './index.css';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
+import { Grid } from 'reflexbox';
 
 export default class Profile extends React.Component {
     render() {
         return (
             <div className={style['root']}>profile
               <Card>
-                <CardHeader
+                {/* <CardHeader
                   title="URL Avatar"
                   subtitle="Subtitle"
                   avatar="images/jsa-128.jpg"
-                />
-                <CardMedia
-                  overlay={<CardTitle title="Overlay title" subtitle="Overlay subtitle" />}
-                >
+                /> */}
+                <CardMedia>
                   <img src="/assets/img/house.png" />
+                  <div className={style['profile-box']}>
+                    <Grid col={4} px={2}>
+                      <img src="/assets/img/Joan.png" />
+                    </Grid>
+                    <Grid col={8} px={2}>
+                      <h2>Joan Wagner</h2>
+                      <h3>$4,450,114.00</h3>
+                      <h4>123 Street, Toronto</h4>
+                    </Grid>
+                  </div>
                 </CardMedia>
                 <CardTitle title="Why invest with Joan Wagner" subtitle="Card subtitle" />
                 <CardText>
@@ -29,6 +38,14 @@ export default class Profile extends React.Component {
                   <FlatButton label="Action1" />
                   <FlatButton label="Action2" />
                 </CardActions>
+                <div>
+                  <Grid col={6} px={2}>
+                    Left column
+                  </Grid>
+                  <Grid col={6} px={2}>
+                    Right column
+                  </Grid>
+                </div>
               </Card>
             </div>
         );

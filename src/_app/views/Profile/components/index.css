@@ -1,3 +1,8 @@
 .root {
   color: red;
 }
+
+.profile-box {
+  background-color: red;
+  max-width: 700px;
+}
