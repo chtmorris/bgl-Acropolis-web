@@ -1,6 +1,6 @@
 import React from 'react';
 import Slider from 'material-ui/Slider';
-import { Link } from 'react-router';
+import {Link} from 'react-router';
 import style from './index.css';
 
 const data = [
@@ -12,7 +12,7 @@ const data = [
         commited_investment: 0.75,
         pic: '/assets/img/Joan.png',
         snapshot: '/assets/img/house1.png',
-        prog: '/assets/img/progBar1.png',
+        prog: '/assets/img/progBar1.png'
     }, {
         name: 'Joe Meyer',
         market_value: '$1,800,000',
@@ -21,7 +21,7 @@ const data = [
         commited_investment: 0.45,
         pic: '/assets/img/person2.png',
         snapshot: '/assets/img/house2.png',
-        prog: '/assets/img/progBar2.png',
+        prog: '/assets/img/progBar2.png'
     }, {
         name: 'Adam Lemmon',
         market_value: '$1,800,000',
@@ -30,7 +30,7 @@ const data = [
         commited_investment: 0.45,
         pic: '/assets/img/person3.png',
         snapshot: '/assets/img/house3.png',
-        prog: '/assets/img/progBar3.png',
+        prog: '/assets/img/progBar3.png'
     }, {
         name: 'Charlie Morris',
         market_value: '$1,800,000',
@@ -39,9 +39,8 @@ const data = [
         commited_investment: 0.45,
         pic: '/assets/img/person4.png',
         snapshot: '/assets/img/house4.png',
-        prog: '/assets/img/progBar3.png',
-    },
-    {
+        prog: '/assets/img/progBar3.png'
+    }, {
         name: 'Joan Wagner',
         market_value: '$4,000,000',
         address: '135 Toronto Street',
@@ -49,7 +48,7 @@ const data = [
         commited_investment: 0.75,
         pic: '/assets/img/person5.png',
         snapshot: '/assets/img/house5.png',
-        prog: '/assets/img/progBar1.png',
+        prog: '/assets/img/progBar1.png'
     }, {
         name: 'Joe Meyer',
         market_value: '$1,800,000',
@@ -58,7 +57,7 @@ const data = [
         commited_investment: 0.45,
         pic: '/assets/img/person6.png',
         snapshot: '/assets/img/house6.png',
-        prog: '/assets/img/progBar2.png',
+        prog: '/assets/img/progBar2.png'
     }
 
 ];
@@ -100,7 +99,7 @@ export default class Home extends React.Component {
                                     </article>
                                 </div>
                                 <div className={style.progbar}>
-                                  <img src={profile.prog}/>
+                                    <img src={profile.prog}/>
                                 </div>
 
                                 {/* <div style={{
@@ -111,7 +110,9 @@ export default class Home extends React.Component {
                             </div>
                             <div className="card-actions">
                                 <div className="layout horizontal center-center">
-                                    <paper-button><Link to="/profile">Invest</Link></paper-button>
+                                    <paper-button>
+                                        <Link to="/profile">Invest</Link>
+                                    </paper-button>
                                 </div>
                             </div>
 

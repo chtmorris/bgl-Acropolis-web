@@ -4,6 +4,18 @@ var settings = require('./settings');
 // Connect to local geth node
 var web3 = new Web3(new Web3.providers.HttpProvider("http://192.168.43.58:8545"));
 
+export function listenToFundingTargetReachedEvent() {
+    let contract = contractLoad(settings.ASSET_LOAN);
+
+    contract['FundingTargetReachedEvent']().watch(function(err, result) {
+        if (err) {
+            alert("there was an error with the target");
+        } else {
+            alert("the funding target was reached");
+        }
+    });
+};
+
 /*** @section Loan Asset Methods */
 export function fundsAdd(amount, callback) {
     console.log('Adding funds: ' + amount);
@@ -22,21 +34,10 @@ export function fundsAdd(amount, callback) {
     callback(null, response);
 }
 
-export function investmentProposalAdd(investor, amount, callback) {
-    /***
-	*/
-    console.log('Adding proposal: ' + investor);
-
-    var contract,
-        owner,
-        response;
-
-    contract = contractLoad(settings.ASSET_LOAN);
-
-    // Must send as the investor
-    owner = accountSetupForTransaction(investor, settings.DEFAULT_PASSWORD);
-
-    response = contract.investmentProposalAdd.sendTransaction({from: owner, value: amount, gas: settings.DEFAULT_GAS});
+export function investmentProposalAdd(investor, amount) {
+    let contract = contractLoad(settings.ASSET_LOAN);
+    let owner = accountSetupForTransaction(investor, settings.DEFAULT_PASSWORD);
+    contract.investmentProposalAdd.sendTransaction({from: owner, value: amount, gas: settings.DEFAULT_GAS});
 
     return new Promise((resolve, reject) => {
         contract['InvestmentProposalAddedEvent']().watch(function(err, result) {
@@ -47,51 +48,44 @@ export function investmentProposalAdd(investor, amount, callback) {
             }
         })
     });
+};
 
-}
-
-export function investmentProposalApprove(investor, callback) {
-    /***
-    */
-    console.log('Approving proposal: ' + investor);
-
-    var contract,
-        owner,
-        response;
-
-    contract = contractLoad(settings.ASSET_LOAN);
-
-    // Send as fueling account
-    owner = accountSetupForTransaction(settings.FUELING_ACCOUNT, settings.DEFAULT_PASSWORD);
-
-    response = contract.investmentProposalApprove.sendTransaction(investor, {
+export function investmentProposalApprove(investor) {
+    let contract = contractLoad(settings.ASSET_LOAN);
+    let owner = accountSetupForTransaction(settings.FUELING_ACCOUNT, settings.DEFAULT_PASSWORD);
+    contract.investmentProposalApprove.sendTransaction(investor, {
         from: owner,
         gas: settings.DEFAULT_GAS
     });
 
-    callback(null, response);
+    return new Promise((resolve, reject) => {
+        contract['InvestmentProposalApprovedEvent']().watch(function(err, result) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(result);
+            }
+        })
+    });
 }
 
-export function investmentProposalDecline(investor, callback) {
-    /***
-	*/
-    console.log('Declining proposal: ' + investor);
-
-    var contract,
-        owner,
-        response;
-
-    contract = contractLoad(settings.ASSET_LOAN);
-
-    // Send as fueling account
-    owner = accountSetupForTransaction(settings.FUELING_ACCOUNT, settings.DEFAULT_PASSWORD);
-
-    response = contract.investmentProposalDecline.sendTransaction(investor, {
+export function investmentProposalDecline(investor) {
+    let contract = contractLoad(settings.ASSET_LOAN);
+    let owner = accountSetupForTransaction(settings.FUELING_ACCOUNT, settings.DEFAULT_PASSWORD);
+    contract.investmentProposalDecline.sendTransaction(investor, {
         from: owner,
         gas: settings.DEFAULT_GAS
     });
 
-    callback(null, response);
+    return new Promise((resolve, reject) => {
+        contract['InvestmentProposalDeclinedEvent']().watch(function(err, result) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(result);
+            }
+        })
+    });
 }
 
 export function paymentExecute(callback) {
@@ -130,7 +124,7 @@ function contractCreateEventListener(contract, event, callback) {
     })
 }
 
-function contractDeployAssetLoan(fileName, id, fromAccount, accountPass, callback) {
+export function contractDeployAssetLoan(fileName, id, fromAccount, accountPass, callback) {
     /**
 	* Deploy a specific contract, source loaded and compiled
 	* based on id, note utilized to deploy registry initially in most cases
@@ -168,7 +162,7 @@ function contractDeployAssetLoan(fileName, id, fromAccount, accountPass, callbac
         data: compiled['data'],
         gas: gasEstimate * 2
     }, function(e, contract) {
-        callbackContractDeployment(e, contract, id);
+        callback(e, contract, id);
     });
     callback(null, gasEstimate);
 };
@@ -186,7 +180,7 @@ function contractLoad(fileName) {
         address;
     contractData = settings.contracts[fileName];
     _interface = contractData['interface'];
-    address = contractData['address'];
+    address = window.localStorage.getItem('contract-address');
     if (address)
         contract = web3.eth.contract(_interface).at(address);
 
@@ -239,7 +233,6 @@ function accountSetupForTransaction(account, password) {
 
     // If no account passed in then default to fueling
     if (!(account)) {
-        debugger
         account = settings.FUELING_ACCOUNT;
         password = settings.DEFAULT_PASSWORD;
     }
@@ -261,7 +254,7 @@ function listeners() {
     contractCreateEventListener(contract, 'PaymentMadeEvent');
 }
 
-// // FULL DEMO TEST
+// FULL DEMO TEST
 //contractDeployAssetLoan(settings.ASSET_LOAN, 'assetLoan', null, null, function(e, r) {});
 
 //listeners();
