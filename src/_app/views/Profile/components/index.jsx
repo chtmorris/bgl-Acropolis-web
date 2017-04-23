@@ -30,22 +30,20 @@ export default class Profile extends React.Component {
         this.setState({contractAddressCreated: true});
       } else {
         contractDeployAssetLoan(settings.ASSET_LOAN, 'assetLoan', null, null, (e, contract, id) => {
-            if (!e) {
-                if (!contract.address) {
-                    console.log("Contract transaction sent: TransactionHash: " + contract.transactionHash + " waiting to be mined...");
-                } else {
-                    console.log('contract address...')
-                    window.localStorage.setItem('contract-address', contract.address);
-                    console.log('contract address stored');
-                    this.setState({contractAddressCreated: true});
-                    listenToFundingTargetReachedEvent();
-                }
+          if (!e) {
+            if (!contract.address) {
+                console.log("Contract transaction sent: TransactionHash: " + contract.transactionHash + " waiting to be mined...");
             } else {
                 console.log("err: " + e)
+                console.log('contract address...')
+                window.localStorage.setItem('contract-address', contract.address);
+                console.log('contract address stored');
+                this.setState({contractAddressCreated: true});
+                listenToFundingTargetReachedEvent();
             }
+          };
         });
       }
-
     }
 
     addInvestment() {

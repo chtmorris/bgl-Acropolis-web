@@ -23,6 +23,7 @@ export function fundsAdd(amount, callback) {
     let contract = contractLoad(settings.ASSET_LOAN);
     let owner = accountSetupForTransaction(settings.BORROWER, settings.DEFAULT_PASSWORD);
     contract.fundsAdd.sendTransaction({from: owner, value: amount, gas: settings.DEFAULT_GAS});
+    console.log('payment made to seller');
 }
 
 export function investmentProposalAdd(investor, amount) {
@@ -37,7 +38,7 @@ export function investmentProposalAdd(investor, amount) {
             } else {
                 resolve(result);
             }
-        })
+        });
     });
 };
 
