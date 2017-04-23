@@ -5,7 +5,6 @@ require('react-tap-event-plugin')();
 
 // log environment properties
 if (process.env.NODE_ENV === 'development') {
-    debugger
     console.info('::process.env::', JSON.stringify(process.env, null, 4));
 }
 
