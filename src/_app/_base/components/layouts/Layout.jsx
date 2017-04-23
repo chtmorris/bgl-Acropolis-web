@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './Layout.css';
-import { Link } from 'react-router';
+import {Link} from 'react-router';
 
 export default class Layout extends React.Component {
     render() {
@@ -14,9 +14,9 @@ export default class Layout extends React.Component {
                     <app-header>
                         <app-toolbar>
                             <Link to='/'>
-                              <div>
-                                <img src='/assets/img/logo.png' className={style.logo}/>
-                              </div>
+                                <div>
+                                    <img src='/assets/img/logo.png' className={style.logo} alt="logo"/>
+                                </div>
                             </Link>
                             <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
                         </app-toolbar>

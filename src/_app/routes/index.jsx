@@ -8,7 +8,6 @@ import Home from '_app/views/Home/components';
 import Profile from '_app/views/Profile/components';
 import Approval from '_app/views/Approval';
 import Dashboard from '_app/views/Dashboard/components';
-import test from '_app/views/test';
 
 const Routes = [(<Route path='/404' component={NoMatch}/>), (
         <Route path='/' component={Layout}>
@@ -17,7 +16,7 @@ const Routes = [(<Route path='/404' component={NoMatch}/>), (
                 main: Home
             }}/>
 
-            <Route path="profile" components={{
+            <Route path="profile/:id" components={{
                 nav: Nav,
                 main: Profile
             }}/>
@@ -30,11 +29,6 @@ const Routes = [(<Route path='/404' component={NoMatch}/>), (
             <Route path="dashboard" components={{
                 nav: Nav,
                 main: Dashboard
-            }}/>
-
-            <Route path="test" components={{
-                nav: Nav,
-                main: test
             }}/>
 
             <Redirect from='/home' to='/'/>
