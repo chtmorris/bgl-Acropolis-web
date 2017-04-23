@@ -26,32 +26,32 @@ export default class Profile extends React.Component {
     }
 
     componentDidMount() {
-      if (window.localStorage.getItem('contract-address')) {
-        this.setState({contractAddressCreated: true});
-      } else {
-        contractDeployAssetLoan(settings.ASSET_LOAN, 'assetLoan', null, null, (e, contract, id) => {
-          if (!e) {
-            if (!contract.address) {
-                console.log("Contract transaction sent: TransactionHash: " + contract.transactionHash + " waiting to be mined...");
-            } else {
-                console.log("err: " + e)
-                console.log('contract address...')
-                window.localStorage.setItem('contract-address', contract.address);
-                console.log('contract address stored');
-                this.setState({contractAddressCreated: true});
-                listenToFundingTargetReachedEvent();
-            }
-          };
-        });
-      }
+        if (window.localStorage.getItem('contract-address')) {
+            this.setState({contractAddressCreated: true});
+        } else {
+            contractDeployAssetLoan(settings.ASSET_LOAN, 'assetLoan', null, null, (e, contract, id) => {
+                if (!e) {
+                    if (!contract.address) {
+                        console.log("Contract transaction sent: TransactionHash: " + contract.transactionHash + " waiting to be mined...");
+                    } else {
+                        console.log("err: " + e)
+                        console.log('contract address...')
+                        window.localStorage.setItem('contract-address', contract.address);
+                        console.log('contract address stored');
+                        this.setState({contractAddressCreated: true});
+                        listenToFundingTargetReachedEvent();
+                    }
+                };
+            });
+        }
     }
 
     addInvestment() {
-        // todo: get value
-        console.log(this.refs.investment_value.value)
         this.setState({buttonText: "Pending", buttonStyle: "orange"});
 
-        investmentProposalAdd(settings.INVESTOR1, 50000).then(res => {
+        let investment_amount = parseInt(this.refs.investment_value.getValue(), 10);
+
+        investmentProposalAdd(settings.INVESTOR1, investment_amount).then(res => {
 
             // todo: future reference
             let _amount = res.args.amount.c[0];
@@ -66,6 +66,7 @@ export default class Profile extends React.Component {
         }).catch(err => {
             console.error(err);
         });
+
     }
 
     render() {
@@ -106,11 +107,11 @@ export default class Profile extends React.Component {
 
                                     {/* ===== LINK HERE TO SMART CONTRACT ===== */}
                                     <div className={style['invest']}>
+
                                         <TextField ref="investment_value" hintText="How much would you like to invest?" underlineStyle={fieldStyle.underlineStyle}/>
+
                                         <span className={style['investAmount']}></span>
-                                        <button className={this.state.buttonStyle}
-                                          onClick={this.addInvestment.bind(this)}
-                                        >
+                                        <button className={this.state.buttonStyle} onClick={this.addInvestment.bind(this)}>
                                             {this.state.buttonText}
                                         </button>
                                     </div>
