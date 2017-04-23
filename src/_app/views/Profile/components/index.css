@@ -8,6 +8,11 @@
   border-radius: 10px;
 }
 
+.houseImg {
+  min-height: 430px;
+  min-width: 1270px !important;
+}
+
 .price{
   color: #7ED321;
   margin-top: -10px !important;

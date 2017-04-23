@@ -107,11 +107,11 @@ export default class Profile extends React.Component {
                                     </div>
 
                                 </div>
-                                <img src="/assets/img/house.png" alt="snapshot"/>
+                                <img src="/assets/img/house.png" alt="snapshot" className={style.houseImg}/>
                             </CardMedia>
 
                             <CardTitle title="Why invest with Joan Wagner" subtitle="Your rate on investment:"/>
-                            <p className={style['rate']}>8.00%</p>
+                            <p className={style['rate']}>2.00%</p>
                             <Grid col={4} px={2} py={2}>
                                 <p className={style['green-text']}>About Joan</p>
                                 <p>Mom with two kids and a loving husband. Work at a GE Aviation unit as an Engineer.</p>
@@ -125,7 +125,6 @@ export default class Profile extends React.Component {
                             <Grid col={4} px={2} py={2}>
                                 <div className={style['video']}>
                                     <img src="/assets/img/vidThumbnail.png" alt="thumbnail"/>
-                                    <p>Backers</p>
                                 </div>
                             </Grid>
 
