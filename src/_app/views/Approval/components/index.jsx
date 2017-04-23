@@ -15,12 +15,12 @@ export default class Approval extends React.Component {
     handleApprove(e) {
         let id = _.toInteger(e.currentTarget.getAttribute('data-id'));
         let investment = this.props.pending.find(investment => investment.id === id);
-        investmentProposalApprove(settings.INVESTOR1).then(result => {
-            this.refs.toaster.text = "investment approved";
-            this.refs.toaster.open();
-        }).catch(err => {
-            alert(err);
-        });
+        // investmentProposalApprove(settings.INVESTOR1).then(result => {
+        //     this.refs.toaster.text = "investment approved";
+        //     this.refs.toaster.open();
+        // }).catch(err => {
+        //     alert(err);
+        // });
         this.props.approve(investment);
     }
 
@@ -70,76 +70,87 @@ export default class Approval extends React.Component {
                                 </Grid>
                             </div>
                         </div>
-                        <img src="/assets/img/house-top.png" alt="snapshot"/>
+                        <img src="/assets/img/house-top.png" alt="snapshot" className={style.headerImg}/>
                     </CardMedia>
 
                     <article>
-                        <h3 className={style.summaryTitle}>Summary</h3>
-                        <div>
-                            <div>A Right Media Mix Can Make The Difference</div>
-                        </div>
+                      <div>
+                        <Grid col={12} px={2} py={2}>
+                          <h3 className={style.summaryTitle}>Summary</h3>
+                          <img src="/assets/img/bigProgBar.png" alt="snapshot" className={style.bigProgBar}/>
+                        </Grid>
+                      </div>
+                      <div>
+                        <Grid col={12} px={2} py={2}>
+                          <h3>Pending Approvals</h3>
+                          <div>
+                              <table className="ss-table">
+                                  <thead>
+                                      <tr>
+                                          <th>Investor</th>
+                                          <th>Contact Email Address</th>
+                                          <th>Date</th>
+                                          <th>Approval</th>
+                                          <th>Amount</th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                      {this.props.pending.map((investment, i) => (
+                                          <tr key={i}>
+                                              <td>{investment.investor}</td>
+                                              <td>{investment.email_address}</td>
+                                              <td>23rd April 2017</td>
+                                              <td className="layout horizontal">
+                                                  <paper-fab mini elevation="4" icon="icons:close" data-id={investment.id} onClick={this.handleDecline.bind(this)}/>
+                                                  <paper-fab mini elevation="4" icon="icons:check" data-id={investment.id} onClick={this.handleApprove.bind(this)}/>
+                                              </td>
+                                              <td>{investment.amount}</td>
+                                          </tr>
+                                      ))}
+                                  </tbody>
+                              </table>
+                          </div>
+                        </Grid>
+                      </div>
                     </article>
 
                     <article>
-                        <h3>Pending Approvals</h3>
-                        <div>
-                            <table className="ss-table">
-                                <thead>
-                                    <tr>
-                                        <th>Investor</th>
-                                        <th>Contact Email Address</th>
-                                        <th>Date</th>
-                                        <th>Approval</th>
-                                        <th>Amount</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {this.props.pending.map((investment, i) => (
-                                        <tr key={i}>
-                                            <td>{investment.investor}</td>
-                                            <td>{investment.email_address}</td>
-                                            <td></td>
-                                            <td className="layout horizontal">
-                                                <paper-fab mini elevation="4" icon="icons:close" data-id={investment.id} onClick={this.handleDecline.bind(this)}/>
-                                                <paper-fab mini elevation="4" icon="icons:check" data-id={investment.id} onClick={this.handleApprove.bind(this)}/>
-                                            </td>
-                                            <td>{investment.amount}</td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-                    </article>
-
-                    <article>
-                        <h3>Approved Investments</h3>
-                        <table className="ss-table">
-                            <thead>
-                                <tr>
-                                    <th>Investor</th>
-                                    <th>Contact Email Address</th>
-                                    <th>Date</th>
-                                    <th>Approval</th>
-                                    <th>Amount</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {this.props.approved.map((investment, i) => (
-                                    <tr key={i}>
-                                        <td>{investment.investor}</td>
-                                        <td>{investment.email_address}</td>
-                                        <td></td>
-                                        <td className="layout horizontal">
-                                            <paper-fab mini elevation="4" icon="icons:close" data-id={investment.id} onClick={this.handleDecline.bind(this)}/>
-                                            <paper-fab mini elevation="4" icon="icons:check" data-id={investment.id} onClick={this.handleApprove.bind(this)}/>
-                                        </td>
-                                        <td>{investment.amount}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
+                      <div>
+                        <Grid col={12} px={2} py={2}>
+                          <h3 className={style.approvedInvestments}>Approved Investments</h3>
+                          <table className="ss-table">
+                              <thead>
+                                  <tr>
+                                      <th>Investor</th>
+                                      <th>Contact Email Address</th>
+                                      <th>Date</th>
+                                      <th>Approval</th>
+                                      <th>Amount</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  {this.props.approved.map((investment, i) => (
+                                      <tr key={i}>
+                                          <td>{investment.investor}</td>
+                                          <td>{investment.email_address}</td>
+                                          <td>23rd April 2017</td>
+                                          <td className="layout horizontal">
+                                              <paper-fab mini elevation="4" icon="icons:close" data-id={investment.id} onClick={this.handleDecline.bind(this)}/>
+                                              <paper-fab mini elevation="4" icon="icons:check" data-id={investment.id} onClick={this.handleApprove.bind(this)}/>
+                                          </td>
+                                          <td>{investment.amount}</td>
+                                      </tr>
+                                  ))}
+                              </tbody>
+                          </table>
+                        </Grid>
+                      </div>
                     </article>
                 </Card>
+
+                <div className={style.footerSpace}>
+                  .
+                </div>
 
                 <paper-toast ref="toaster"/>
 
