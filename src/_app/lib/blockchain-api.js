@@ -12,26 +12,18 @@ export function listenToFundingTargetReachedEvent() {
             alert("there was an error with the target");
         } else {
             alert("the funding target was reached");
+            fundsAdd(200000);
         }
     });
 };
 
 /*** @section Loan Asset Methods */
 export function fundsAdd(amount, callback) {
-    console.log('Adding funds: ' + amount);
+    let contract = contractLoad(settings.ASSET_LOAN);
+    let owner = accountSetupForTransaction(settings.BORROWER, settings.DEFAULT_PASSWORD);
+    contract.fundsAdd.sendTransaction({from: owner, value: amount, gas: settings.DEFAULT_GAS});
 
-    var contract,
-        owner,
-        response;
-
-    contract = contractLoad(settings.ASSET_LOAN);
-
-    // Must send as the borrowers
-    owner = accountSetupForTransaction(settings.BORROWER, settings.DEFAULT_PASSWORD);
-
-    response = contract.fundsAdd.sendTransaction({from: owner, value: amount, gas: settings.DEFAULT_GAS});
-
-    callback(null, response);
+    console.log('payment made to seller');
 }
 
 export function investmentProposalAdd(investor, amount) {
@@ -46,7 +38,7 @@ export function investmentProposalAdd(investor, amount) {
             } else {
                 resolve(result);
             }
-        })
+        });
     });
 };
 
