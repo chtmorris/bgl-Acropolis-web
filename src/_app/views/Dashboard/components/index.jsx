@@ -66,13 +66,33 @@ const pieChartOptions = {
     }
 }
 
-const crosshairSelection = {
+const crosshairSelection = [{
   "row": 0,
   "column": 1
-}
+}]
 
 export default class Dashboard extends React.Component {
+
+    constructor(props) {
+      super(props);
+      this.state = {crosshairSelection};
+    }
+
+    handleUpdatedOwnership(e) {
+      crosshairSelection[0].row += 1;
+      this.setState({crosshairSelection});
+
+
+      console.log(crosshairSelection[0].row);
+      // google-chart.redraw();
+    }
+
+    componentDidUpdate() {
+      this.refs.line_chart.redraw();
+    }
+
     render() {
+      console.log(this.state)
         return (
           <div>
             <CardMedia>
@@ -119,6 +139,7 @@ export default class Dashboard extends React.Component {
                       type='column'
                       options={JSON.stringify(pieChartOptions)}
                       data={JSON.stringify(columnChartData)}
+                      selection={JSON.stringify(crosshairSelection)}
                       >
                     </google-chart>
                   </Grid>
@@ -138,15 +159,17 @@ export default class Dashboard extends React.Component {
                     <p className={style.title}>Current payment</p>
                     <p className={style.subtitle}>Years to ownership</p>
                       <google-chart
+                        ref="line_chart"
                         type='line'
                         options={JSON.stringify(pieChartOptions)}
                         data={JSON.stringify(lineChartData)}
-                        selected={JSON.stringify(crosshairSelection)}
+                        selection={JSON.stringify(this.state.crosshairSelection)}
                         >
                       </google-chart>
                   </Grid>
                 </div>
               </article>
+              <button onClick={this.handleUpdatedOwnership.bind(this)}>Next</button>
             </CardMedia>
           </div>
         );
