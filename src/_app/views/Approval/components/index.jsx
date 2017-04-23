@@ -9,17 +9,25 @@ import {investmentProposalApprove, investmentProposalDecline, listenToFundingTar
 export default class Approval extends React.Component {
 
     componentDidMount(){
-      listenToFundingTargetReachedEvent();
+      listenToFundingTargetReachedEvent().then(
+        res => {
+          let _confirm = confirm('Your funding target has been reached!');
+          this.props.router.push("/dashboard");
+        }
+      );
     }
 
     handleApprove(e) {
         let id = _.toInteger(e.currentTarget.getAttribute('data-id'));
         let investment = this.props.pending.find(investment => investment.id === id);
         investmentProposalApprove(settings.INVESTOR1).then(result => {
-            this.refs.toaster.text = "investment approved";
-            this.refs.toaster.open();
+            if (this && this.refs && this.refs.toaster) {
+              this.refs.toaster.text = "investment approved";
+              this.refs.toaster.open();
+            }
+
         }).catch(err => {
-            alert(err);
+          console.log(err);
         });
         this.props.approve(investment);
     }

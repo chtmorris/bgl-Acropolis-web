@@ -18,10 +18,10 @@ module.exports = {
 
     // demo asset loan values
     ASSET_VALUE: 200000,
-    FUNDING_TARGET: 100000,
+    FUNDING_TARGET: 500000,
     INTEREST_RATE: 2,
     MIN_INVESTMENT: 10000,
-    PAYMENT_SIZE: 50000,
+    PAYMENT_SIZE: 250000,
 
     ASSET_LOAN: 'AssetLoan',
 

@@ -1,7 +1,7 @@
 export default {
     1 : {
-        name: 'Rahul Kapoor',
-        market_value: '$4,000,000',
+        name: 'Joan Wagner',
+        market_value: '$1,200,000',
         address: '135 Toronto Street',
         minimum_investment: 25000,
         commited_investment: 0.75,

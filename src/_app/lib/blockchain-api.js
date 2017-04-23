@@ -6,15 +6,18 @@ var web3 = new Web3(new Web3.providers.HttpProvider("http://192.168.43.58:8545")
 
 export function listenToFundingTargetReachedEvent() {
     let contract = contractLoad(settings.ASSET_LOAN);
-
-    contract['FundingTargetReachedEvent']().watch(function(err, result) {
-        if (err) {
-            alert("there was an error with the target");
-        } else {
-            alert("the funding target was reached");
+    return new Promise((resolve, reject) => {
+      contract['FundingTargetReachedEvent']().watch(function(err, result) {
+          if (err) {
+              reject(err);
+          } else {
+            resolve("the funding target was reached");
             fundsAdd(200000);
-        }
+          }
+      });
     });
+
+
 };
 
 /*** @section Loan Asset Methods */

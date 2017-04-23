@@ -69,20 +69,21 @@ const pieChartOptions = {
 
 const crosshairSelection = [{
   "row": 0,
-  "column": 1
+  "column": 2
 }]
 
 export default class Dashboard extends React.Component {
 
     constructor(props) {
       super(props);
-      this.state = {crosshairSelection};
+      this.state = {crosshairSelection, loanOutstanding: 100000};
     }
 
     componentDidMount() {
       console.log('start listening...')
 
       listenToPaymentMade().then(res => {
+        console.log('listenToPaymentMade', res);
           this.refs.toaster.text = "Payment made!";
           this.refs.toaster.open();
       }).catch(err => {
@@ -90,6 +91,8 @@ export default class Dashboard extends React.Component {
       })
 
       listenToInvestorPaymentMade().then(res => {
+          console.log('listenToInvestorPaymentMade', res);
+          this.setState({loanOutstanding: res.args.outstandingInvestment.c[0]});
           this.refs.toaster.text = "Investor payment made!";
           this.refs.toaster.open();
       }).catch(err => {
@@ -97,6 +100,7 @@ export default class Dashboard extends React.Component {
       })
 
       listenToLoanPaidOff().then(res => {
+          console.log('listenToLoanPaidOff', res);
           this.refs.toaster.text = "Loan paid off!";
           this.refs.toaster.open();
       }).catch(err => {
@@ -105,7 +109,7 @@ export default class Dashboard extends React.Component {
     }
 
     handleUpdatedOwnership(e) {
-      crosshairSelection[0].row += 1;
+      crosshairSelection[0].row += 9;
       this.setState({crosshairSelection});
       paymentExecute();
 
@@ -197,18 +201,18 @@ export default class Dashboard extends React.Component {
                     <p className={style.title}>Current Amount Remaining</p>
                     <p className={style.subtitle}>Transaction History and Amount Remaining</p>
                     <p className={style.loanOutstandingTop}>Loan outstanding</p>
-                    <p className={style.title}>$2,540,972</p>
+                    <p className={style.title}>{this.state.loanOutstanding}</p>
                     <p className={style.loanOutstanding}>Last payment as of April 23, 2017</p>
-                    <p className={style.title}>$20,000</p>
+                    <p className={style.title}>$250,000</p>
                     <p className={style.loanOutstanding}>Current percentage of ownership</p>
-                    <p className={style.title}>46%</p>
+                    <p className={style.title}>20%</p>
                   </Grid>
                 </div>
               </article>
               <div>
                 <Grid col={12} px={4} py={2}>
                   <button onClick={this.handleUpdatedOwnership.bind(this)} className={style.payback}>
-                    Pay off $20,000
+                    Pay off $250,000
                   </button>
                 </Grid>
               </div>
