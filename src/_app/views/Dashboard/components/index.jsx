@@ -148,7 +148,7 @@ export default class Dashboard extends React.Component {
                   </Grid>
                 </div>
               </div>
-              <img src="/assets/img/house-top.png" alt="snapshot"/>
+              <img src="/assets/img/house-top.png" alt="snapshot" className={style.headerImg}/>
 
 
               <article>
@@ -181,7 +181,7 @@ export default class Dashboard extends React.Component {
                   </Grid>
                 </div>
                 <div>
-                  <Grid col={12} px={2} py={2}>
+                  <Grid col={8} px={2} py={2}>
                     <p className={style.title}>Current payment</p>
                     <p className={style.subtitle}>Years to ownership</p>
                       <google-chart
@@ -193,12 +193,29 @@ export default class Dashboard extends React.Component {
                         >
                       </google-chart>
                   </Grid>
+                  <Grid col={4} px={2} py={2}>
+                    <p className={style.title}>Current Amount Remaining</p>
+                    <p className={style.subtitle}>Transaction History and Amount Remaining</p>
+                    <p className={style.loanOutstandingTop}>Loan outstanding</p>
+                    <p className={style.title}>$2,540,972</p>
+                    <p className={style.loanOutstanding}>Last payment as of April 23, 2017</p>
+                    <p className={style.title}>$20,000</p>
+                    <p className={style.loanOutstanding}>Current percentage of ownership</p>
+                    <p className={style.title}>46%</p>
+                  </Grid>
                 </div>
               </article>
-              <button onClick={this.handleUpdatedOwnership.bind(this)}>
-                Pay off $20,000
-              </button>
+              <div>
+                <Grid col={12} px={4} py={2}>
+                  <button onClick={this.handleUpdatedOwnership.bind(this)} className={style.payback}>
+                    Pay off $20,000
+                  </button>
+                </Grid>
+              </div>
             </CardMedia>
+            <div className={style.footerSpace}>
+              .
+            </div>
             <paper-toast ref="toaster"/>
           </div>
         );

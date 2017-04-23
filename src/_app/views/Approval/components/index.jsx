@@ -15,12 +15,12 @@ export default class Approval extends React.Component {
     handleApprove(e) {
         let id = _.toInteger(e.currentTarget.getAttribute('data-id'));
         let investment = this.props.pending.find(investment => investment.id === id);
-        // investmentProposalApprove(settings.INVESTOR1).then(result => {
-        //     this.refs.toaster.text = "investment approved";
-        //     this.refs.toaster.open();
-        // }).catch(err => {
-        //     alert(err);
-        // });
+        investmentProposalApprove(settings.INVESTOR1).then(result => {
+            this.refs.toaster.text = "investment approved";
+            this.refs.toaster.open();
+        }).catch(err => {
+            alert(err);
+        });
         this.props.approve(investment);
     }
 

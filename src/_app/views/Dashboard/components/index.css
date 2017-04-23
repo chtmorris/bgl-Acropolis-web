@@ -5,6 +5,11 @@
   margin: 20px;
 }
 
+.headerImg {
+  min-height: 220px;
+  min-width: 1270px !important;
+}
+
 .price{
   color: #7ED321;
   margin-top: -10px !important;
@@ -33,6 +38,7 @@ p {
 
 .summaryTitle {
   margin-top: 130px;
+  margin-bottom: 0px !important;
 }
 
 .title {
@@ -47,4 +53,21 @@ p {
 
 google-chart {
   width: 100%;
+}
+
+.footerSpace {
+  min-height: 30px;
+}
+
+.payback {
+  min-width: 100% !important;
+  width: 100% !important;
+}
+
+.loanOutstanding {
+  margin: 20px 0 0px 0;
+}
+
+.loanOutstandingTop {
+  margin: 67px 0 0px 0;
 }
