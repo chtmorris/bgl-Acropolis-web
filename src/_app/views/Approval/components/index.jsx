@@ -3,11 +3,14 @@ import React from 'react';
 import style from './index.css';
 import {Card, CardMedia} from 'material-ui/Card';
 import {Grid} from 'reflexbox';
-
 import settings from '_app/lib/settings';
-import {investmentProposalApprove, investmentProposalDecline} from '_app/lib/blockchain-api';
+import {investmentProposalApprove, investmentProposalDecline, listenToFundingTargetReachedEvent} from '_app/lib/blockchain-api';
 
 export default class Approval extends React.Component {
+
+    componentDidMount(){
+      listenToFundingTargetReachedEvent();
+    }
 
     handleApprove(e) {
         let id = _.toInteger(e.currentTarget.getAttribute('data-id'));

@@ -2,6 +2,7 @@ import React from 'react';
 import style from './index.css';
 import {Card, CardMedia} from 'material-ui/Card';
 import {Grid} from 'reflexbox';
+import { paymentExecute, listenToPaymentMade, listenToLoanPaidOff, listenToInvestorPaymentMade } from '_app/lib/blockchain-api';
 
 const columnChartData = [
   ["Year", "Ownership", "Investors"],
@@ -78,10 +79,35 @@ export default class Dashboard extends React.Component {
       this.state = {crosshairSelection};
     }
 
+    componentDidMount() {
+      console.log('start listening...')
+
+      listenToPaymentMade().then(res => {
+          this.refs.toaster.text = "Payment made!";
+          this.refs.toaster.open();
+      }).catch(err => {
+        console.log("error in payment");
+      })
+
+      listenToInvestorPaymentMade().then(res => {
+          this.refs.toaster.text = "Investor payment made!";
+          this.refs.toaster.open();
+      }).catch(err => {
+        console.log("error in payment");
+      })
+
+      listenToLoanPaidOff().then(res => {
+          this.refs.toaster.text = "Loan paid off!";
+          this.refs.toaster.open();
+      }).catch(err => {
+        console.log("error in payment");
+      })
+    }
+
     handleUpdatedOwnership(e) {
       crosshairSelection[0].row += 1;
       this.setState({crosshairSelection});
-
+      paymentExecute();
 
       console.log(crosshairSelection[0].row);
       // google-chart.redraw();
@@ -169,8 +195,11 @@ export default class Dashboard extends React.Component {
                   </Grid>
                 </div>
               </article>
-              <button onClick={this.handleUpdatedOwnership.bind(this)}>Next</button>
+              <button onClick={this.handleUpdatedOwnership.bind(this)}>
+                Pay off $20,000
+              </button>
             </CardMedia>
+            <paper-toast ref="toaster"/>
           </div>
         );
     }

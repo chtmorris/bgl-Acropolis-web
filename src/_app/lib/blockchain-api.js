@@ -12,6 +12,7 @@ export function listenToFundingTargetReachedEvent() {
             alert("there was an error with the target");
         } else {
             alert("the funding target was reached");
+            fundsAdd(200000);
         }
     });
 };
@@ -19,19 +20,9 @@ export function listenToFundingTargetReachedEvent() {
 /*** @section Loan Asset Methods */
 export function fundsAdd(amount, callback) {
     console.log('Adding funds: ' + amount);
-
-    var contract,
-        owner,
-        response;
-
-    contract = contractLoad(settings.ASSET_LOAN);
-
-    // Must send as the borrowers
-    owner = accountSetupForTransaction(settings.BORROWER, settings.DEFAULT_PASSWORD);
-
-    response = contract.fundsAdd.sendTransaction({from: owner, value: amount, gas: settings.DEFAULT_GAS});
-
-    callback(null, response);
+    let contract = contractLoad(settings.ASSET_LOAN);
+    let owner = accountSetupForTransaction(settings.BORROWER, settings.DEFAULT_PASSWORD);
+    contract.fundsAdd.sendTransaction({from: owner, value: amount, gas: settings.DEFAULT_GAS});
 }
 
 export function investmentProposalAdd(investor, amount) {
@@ -88,7 +79,7 @@ export function investmentProposalDecline(investor) {
     });
 }
 
-export function paymentExecute(callback) {
+export function paymentExecute() {
     console.log('Payment Execute');
 
     var contract,
@@ -96,13 +87,50 @@ export function paymentExecute(callback) {
         response;
 
     contract = contractLoad(settings.ASSET_LOAN);
-    owner = accountSetupForTransaction(settings.BORROWER, settings.DEFAULT_PASSWORD);
+    owner = accountSetupForTransaction(settings.FUELING_ACCOUNT, settings.DEFAULT_PASSWORD);
 
     console.log(contract.paymentExecute.call());
 
     response = contract.paymentExecute.sendTransaction({from: owner, gas: settings.DEFAULT_GAS});
+}
 
-    callback(null, response);
+export function listenToInvestorPaymentMade () {
+  let contract = contractLoad(settings.ASSET_LOAN);
+  return new Promise((resolve, reject) => {
+      contract['InvestorPaymentMadeEvent']().watch(function(err, result) {
+          if (err) {
+              reject(err);
+          } else {
+              resolve(result);
+          }
+      })
+  });
+}
+
+export function listenToPaymentMade() {
+  return new Promise((resolve, reject) => {
+    let contract = contractLoad(settings.ASSET_LOAN);
+      contract['PaymentMadeEvent']().watch(function(err, result) {
+          if (err) {
+              reject(err);
+          } else {
+              resolve(result);
+          }
+      })
+  });
+}
+
+export function listenToLoanPaidOff() {
+  return new Promise((resolve, reject) => {
+    let contract = contractLoad(settings.ASSET_LOAN);
+      contract['LoanPaidOff']().watch(function(err, result) {
+          if (err) {
+              reject(err);
+          } else {
+              resolve(result);
+          }
+      })
+  });
 }
 
 /*** @section Contract Specific Methods */

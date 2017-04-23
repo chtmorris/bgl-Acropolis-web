@@ -19,11 +19,16 @@ export default class Profile extends React.Component {
         super(props);
 
         this.state = {
-            contractAddressCreated: false
+            contractAddressCreated: false,
+            buttonText: "Invest with Joan",
+            buttonStyle: "mdc-button mdc-button--primary"
         };
     }
 
     componentDidMount() {
+      if (window.localStorage.getItem('contract-address')) {
+        this.setState({contractAddressCreated: true});
+      } else {
         contractDeployAssetLoan(settings.ASSET_LOAN, 'assetLoan', null, null, (e, contract, id) => {
             if (!e) {
                 if (!contract.address) {
@@ -39,12 +44,14 @@ export default class Profile extends React.Component {
                 console.log("err: " + e)
             }
         });
+      }
 
     }
 
     addInvestment() {
         // todo: get value
         console.log(this.refs.investment_value.value)
+        this.setState({buttonText: "Pending", buttonStyle: "orange"});
 
         investmentProposalAdd(settings.INVESTOR1, 50000).then(res => {
 
@@ -55,6 +62,8 @@ export default class Profile extends React.Component {
 
             this.refs.toaster.text = "investment added";
             this.refs.toaster.open();
+
+            this.setState({buttonText: "Submitted!", buttonStyle: "mdc-button mdc-button--primary"});
 
         }).catch(err => {
             console.error(err);
@@ -101,8 +110,10 @@ export default class Profile extends React.Component {
                                     <div className={style['invest']}>
                                         <TextField ref="investment_value" hintText="How much would you like to invest?" underlineStyle={fieldStyle.underlineStyle}/>
                                         <span className={style['investAmount']}></span>
-                                        <button className="mdc-button mdc-button--primary" onClick={this.addInvestment.bind(this)}>
-                                            Invest with Joan
+                                        <button className={this.state.buttonStyle}
+                                          onClick={this.addInvestment.bind(this)}
+                                        >
+                                            {this.state.buttonText}
                                         </button>
                                     </div>
 

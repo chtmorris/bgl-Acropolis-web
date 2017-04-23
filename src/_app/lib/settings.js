@@ -21,7 +21,7 @@ module.exports = {
     FUNDING_TARGET: 100000,
     INTEREST_RATE: 2,
     MIN_INVESTMENT: 10000,
-    PAYMENT_SIZE: 20000,
+    PAYMENT_SIZE: 50000,
 
     ASSET_LOAN: 'AssetLoan',
 
