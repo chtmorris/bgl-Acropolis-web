@@ -68,15 +68,22 @@ const pieChartOptions = {
 }
 
 const crosshairSelection = [{
-  "row": 0,
-  "column": 2
+  "row": 1,
+  "column": 1
 }]
+
+let loanOutstanding = 500000;
+let amountPaid = 0;
 
 export default class Dashboard extends React.Component {
 
     constructor(props) {
       super(props);
-      this.state = {crosshairSelection, loanOutstanding: 100000};
+      this.state = {
+        crosshairSelection,
+        loanOutstanding: loanOutstanding,
+        amountPaid: amountPaid,
+      };
     }
 
     componentDidMount() {
@@ -84,27 +91,35 @@ export default class Dashboard extends React.Component {
 
       listenToPaymentMade().then(res => {
         console.log('listenToPaymentMade', res);
-          this.refs.toaster.text = "Payment made!";
-          this.refs.toaster.open();
+          this.refs.toaster1.text = "Payment made!";
+          this.refs.toaster1.open();
       }).catch(err => {
-        console.log("error in payment");
+        console.error("error in payment 1");
+        console.dir(err);
       })
 
       listenToInvestorPaymentMade().then(res => {
           console.log('listenToInvestorPaymentMade', res);
-          this.setState({loanOutstanding: res.args.outstandingInvestment.c[0]});
-          this.refs.toaster.text = "Investor payment made!";
-          this.refs.toaster.open();
+          console.dir(res.args.outstaningInvestment);
+          let amountPaidNow = 250000;
+          this.setState({
+            loanOutstanding: this.state.loanOutstanding - amountPaidNow,
+            amountPaid: this.state.amountPaid + amountPaidNow
+          });
+          this.refs.toaster2.text = "Investor payment made!";
+          this.refs.toaster2.open();
       }).catch(err => {
-        console.log("error in payment");
+        console.error("error in payment 2");
+        console.dir(err);
       })
 
       listenToLoanPaidOff().then(res => {
           console.log('listenToLoanPaidOff', res);
-          this.refs.toaster.text = "Loan paid off!";
-          this.refs.toaster.open();
+          this.refs.toaster3.text = "Loan paid off!";
+          this.refs.toaster3.open();
       }).catch(err => {
-        console.log("error in payment");
+        console.error("error in payment 3");
+        console.dir(err);
       })
     }
 
@@ -203,9 +218,9 @@ export default class Dashboard extends React.Component {
                     <p className={style.loanOutstandingTop}>Loan outstanding</p>
                     <p className={style.title}>{this.state.loanOutstanding}</p>
                     <p className={style.loanOutstanding}>Last payment as of April 23, 2017</p>
-                    <p className={style.title}>$250,000</p>
+                    <p className={style.title}>{this.state.amountPaid}</p>
                     <p className={style.loanOutstanding}>Current percentage of ownership</p>
-                    <p className={style.title}>20%</p>
+                    <p className={style.title}> {this.state.amountPaid ? (500000/this.state.amountPaid):0} </p>
                   </Grid>
                 </div>
               </article>
@@ -220,7 +235,9 @@ export default class Dashboard extends React.Component {
             <div className={style.footerSpace}>
               .
             </div>
-            <paper-toast ref="toaster"/>
+            <paper-toast ref="toaster1"/>
+            <paper-toast ref="toaster2"/>
+            <paper-toast ref="toaster3"/>
           </div>
         );
     }

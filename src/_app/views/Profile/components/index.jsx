@@ -86,7 +86,8 @@ export default class Profile extends React.Component {
                                         </Grid>
                                         <Grid col={8} px={2} py={2}>
                                             <h2>Joan Wagner</h2>
-                                            <p className={style['price']}>$1,200,000.00</p>
+                                            {/* <div className={style.lookingFor}>Looking for:</div> */}
+                                            <p className={style['price']}>Looking for <strong>$200,000.00</strong></p>
                                             <h4>123 Street, Toronto</h4>
                                         </Grid>
                                     </div>
